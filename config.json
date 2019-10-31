@@ -1,0 +1,17 @@
+{
+    "seed": "0",
+    "armies": {
+        "red": {
+            "strategy": "random",
+            "squad_amount": "1",
+            "units_per_squad": "2",
+            "venicle_proportion": "0.5"
+        },
+        "blue": {
+            "strategy": "random",
+            "squad_amount": "4",
+            "units_per_squad": "5",
+            "venicle_proportion": "0.2"
+        }
+    }
+}
