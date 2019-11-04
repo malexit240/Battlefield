@@ -1,7 +1,7 @@
 {
-    "seed": "0",
+    "seed": 0,
     "unit_configuration": {
-        "max_soldier_health": "30",
+        "max_soldier_health": 30,
         "min_soldier_recharge": "100",
         "max_soldier_recharge": "2000",
         "max_soldier_experience": "50"

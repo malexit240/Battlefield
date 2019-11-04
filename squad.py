@@ -1,5 +1,5 @@
 from army_organization import Division, Subject
-from units.unit import get_attrs_from_objects_list as gafol
+
 
 
 class Squad(Division, Subject):
@@ -12,7 +12,8 @@ class Squad(Division, Subject):
 
     @property
     def power(self) -> float:
-        return sum(gafol('power', self.units))
+        return sum((unit.power for unit in self.units))
+        
 
     def __gt__(self, obj):
         try:

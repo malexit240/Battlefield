@@ -2,12 +2,6 @@ from local_random import R
 from army_organization import Division, Subject
 
 
-def get_attrs_from_objects_list(name: str, objects: list):
-    """return generator of attributes  from objects that contain these attributes"""
-    for o in objects:
-        yield o.__getattribute__(name)
-
-
 class Unit(Subject):
     """Unit class"""
     __health: float
