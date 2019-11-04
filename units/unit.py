@@ -39,3 +39,9 @@ class Unit(Subject):
     def hit(self) -> bool:
         """return whether attack was successful"""
         return R.random() < self.atack_probability
+
+    def __gt__(self, obj):
+        return self.power > obj.power
+
+    def __lt__(self, obj):
+        return self.power < obj.power

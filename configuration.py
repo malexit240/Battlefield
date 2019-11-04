@@ -1,16 +1,27 @@
 import json
 
-json_file = open('config.json', 'rb')
 
-RAW_CONFIGURATION = json.load(json_file)
+class Configuration:
 
-ARMIES_CONFIGURATION = RAW_CONFIGURATION.pop('armies')
-SEED = int(RAW_CONFIGURATION.pop('seed'))
+    seed: int
+    armies: dict
+    units: dict
+
+    def __init__(self):
+        pass
+
+    def load(self, path: str):
+        json_file = open(path, 'rb')
+        raw = json.load(json_file)
+
+        self.seed = int(raw.pop('seed'))
+
+        self.armies = raw.pop('armies')
+
+        self.units = raw.pop('unit_configuration')
+
+        for key in self.units:
+            self.units[key] = int(self.units[key])
 
 
-UNITS_CONFIGURATION = RAW_CONFIGURATION.pop('unit_configuration')
-
-for key in UNITS_CONFIGURATION:
-    UNITS_CONFIGURATION[key] = int(UNITS_CONFIGURATION[key])
-
-del RAW_CONFIGURATION
+CONFIGURATION = Configuration()

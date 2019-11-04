@@ -1,6 +1,4 @@
-from configuration import ARMIES_CONFIGURATION as AConf
-from configuration import UNITS_CONFIGURATION as UConf
-from configuration import SEED as seed
+from configuration import CONFIGURATION as Conf
 from battlefield import Battlefield
 from local_random import R
 
@@ -13,8 +11,8 @@ def get_operators(amount: int) -> list:
     operators = list()
 
     for _ in range(amount):
-        operators.append(Soldier(UConf['max_soldier_health'], R.randint(
-            UConf['min_soldier_recharge'], UConf['max_soldier_recharge'])))
+        operators.append(Soldier(Conf.units['max_soldier_health'], R.randint(
+            Conf.units['min_soldier_recharge'], Conf.units['max_soldier_recharge'])))
 
     return operators
 
@@ -24,7 +22,7 @@ def get_units(amount: int, vehicle_proportion: float, operators_amount: int) -> 
 
     for _ in range(amount):
         unit = R.choices([Soldier, Vehicles], weights=[
-            1-vehicle_proportion, vehicle_proportion])[0](UConf['max_soldier_health'], R.randint(UConf['min_soldier_recharge'], UConf['max_soldier_recharge']))
+            1-vehicle_proportion, vehicle_proportion])[0](Conf.units['max_soldier_health'], R.randint(Conf.units['min_soldier_recharge'], Conf.units['max_soldier_recharge']))
         if(isinstance(unit, Vehicles)):
             unit.operators = get_operators(operators_amount)
         units.append(unit)
@@ -44,13 +42,15 @@ def get_squads(army_config: list) -> list:
 
 def main():
 
-    R.seed(seed)
+    Conf.load('config.json')
+
+    R.seed(Conf.seed)
 
     armies = list()
 
-    for army_name in AConf:
+    for army_name in Conf.armies:
         armies.append(Army(army_name, get_squads(
-            AConf[army_name]), AConf[army_name]['strategy']))
+            Conf.armies[army_name]), Conf.armies[army_name]['strategy']))
 
     b = Battlefield(armies)
 

@@ -7,25 +7,25 @@
         "max_soldier_experience": "50"
     },
     "armies": {
-        "red": {
+        "Red": {
             "strategy": "random",
-            "squad_amount": "10",
-            "units_per_squad": "2",
-            "vehicle_proportion": "0.25",
-            "operators_in_vehicle_amount": "3"
-        },
-        "blue": {
-            "strategy": "weakest",
             "squad_amount": "5",
-            "units_per_squad": "4",
+            "units_per_squad": "3",
             "vehicle_proportion": "0.25",
             "operators_in_vehicle_amount": "3"
         },
-        "green": {
-            "strategy": "strongest",
-            "squad_amount": "1",
-            "units_per_squad": "1",
-            "vehicle_proportion": "0",
+        "Blue": {
+            "strategy": "random",
+            "squad_amount": "5",
+            "units_per_squad": "3",
+            "vehicle_proportion": "0.25",
+            "operators_in_vehicle_amount": "3"
+        },
+        "Green": {
+            "strategy": "random",
+            "squad_amount": "5",
+            "units_per_squad": "3",
+            "vehicle_proportion": "0.25",
             "operators_in_vehicle_amount": "3"
         }
     }

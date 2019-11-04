@@ -61,4 +61,4 @@ class Battlefield(Division):
             if(second_unit.health > 0 and second_unit.hit):
                 first_unit.damage_inflicte(second_unit.damage)
 
-        print(self.armies[0].name)
+        print(f" \x1b[31m  Выиграла {self.armies[0].name} армия \x1b[37m")
