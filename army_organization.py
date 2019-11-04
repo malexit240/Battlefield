@@ -11,7 +11,7 @@ class Division:
     _subdivision: list
 
     def __init__(self, subdivision: list):
-        self.subdivision = subdivision
+        self._subdivision = subdivision
 
     @property
     def subdivision(self) -> list:

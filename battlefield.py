@@ -12,7 +12,7 @@ class Battlefield(Division):
     _armies: list
 
     def __init__(self, armies: list):
-        self.armies = armies
+        self._armies = armies
 
     def shake_armies(self):
         """Change armies order"""

@@ -10,21 +10,21 @@
         "Red": {
             "strategy": "random",
             "squad_amount": "5",
-            "units_per_squad": "3",
+            "units_per_squad": "4",
             "vehicle_proportion": "0.25",
             "operators_in_vehicle_amount": "3"
         },
         "Blue": {
             "strategy": "random",
             "squad_amount": "5",
-            "units_per_squad": "3",
+            "units_per_squad": "4",
             "vehicle_proportion": "0.25",
             "operators_in_vehicle_amount": "3"
         },
         "Green": {
             "strategy": "random",
             "squad_amount": "5",
-            "units_per_squad": "3",
+            "units_per_squad": "4",
             "vehicle_proportion": "0.25",
             "operators_in_vehicle_amount": "3"
         }

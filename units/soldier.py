@@ -16,8 +16,7 @@ class Soldier(Unit):
 
     @experience.setter
     def experience(self, value):
-        if(self._experience <= 50):
-            self._experience = value
+        self._experience = min(value,50)
 
     @property
     def damage(self) -> float:

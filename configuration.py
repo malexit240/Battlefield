@@ -11,8 +11,10 @@ class Configuration:
         pass
 
     def load(self, path: str):
-        json_file = open(path, 'rb')
+        # =============== add with
+        json_file = open(path, 'rb') # ==================================== or generate config
         raw = json.load(json_file)
+        json_file.close()
 
         self.seed = int(raw.pop('seed'))
 

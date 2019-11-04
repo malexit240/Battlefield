@@ -14,7 +14,8 @@ class Vehicles(Unit, Division):
 
     @property
     def health(self) -> float:
-        return sum((operator.health for operator in self._operators)) + self.__health
+        return sum((operator.health
+                    for operator in self._operators)) + self.__health
 
     @health.setter
     def health(self, value):
@@ -26,7 +27,8 @@ class Vehicles(Unit, Division):
 
     @property
     def atack_probability(self) -> float:
-        return 0.5 * (1 + self.__health / 100.0) * mean((operator.atack_probability for operator in self._operators))
+        return 0.5 * (1 + self.__health / 100.0) * mean((operator.atack_probability
+                                                         for operator in self._operators))
 
     @property
     def power(self) -> float:
@@ -43,7 +45,8 @@ class Vehicles(Unit, Division):
 
     @property
     def experience(self) -> int:
-        return sum((operator.experience for operator in self._operators))
+        return sum((operator.experience 
+                    for operator in self._operators))
 
     def damage_inflicte(self, damage: int):
 

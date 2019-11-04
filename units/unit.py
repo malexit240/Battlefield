@@ -1,12 +1,13 @@
 from local_random import R
 from army_organization import Division, Subject
-
+from .unit_registry import add_id
 
 class Unit(Subject):
     """Unit class"""
     __health: float
     recharge: int  # not used
 
+    @add_id
     def __init__(self, health: float, recharge: int):
         self.__health = health
         self.recharge = recharge
