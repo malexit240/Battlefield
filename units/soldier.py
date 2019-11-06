@@ -16,14 +16,14 @@ class Soldier(Unit):
 
     @experience.setter
     def experience(self, value):
-        self._experience = min(value,50)
+        self._experience = min(value, 50)
 
     @property
     def damage(self) -> float:
-        return 0.05 + self.experience / 100.0
+        return 0.05 + self.experience
 
     @property
-    def atack_probability(self) -> float:
+    def attack_probability(self) -> float:
         return 0.5 * (1+self.health/100.0) * R.randint(49+self.experience, 100)/100.0
 
     @property
@@ -31,12 +31,13 @@ class Soldier(Unit):
         return 0.8 * self.experience + 0.2 * self.health
 
     def damage_inflicte(self, damage: int):
+        if(damage == 0):
+            return
+
         self.health -= damage
 
-    @property
-    def hit(self) -> bool:
-        """return whether attack was successful"""
-        isHit = R.random() < self.atack_probability
-        if(isHit):
+    def beat(self, other_unit: Unit):
+        damage = super().beat(other_unit)
+        if(damage != 0):
             self.experience += 1
-        return isHit
+        return damage

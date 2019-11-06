@@ -1,24 +1,34 @@
+from time import time as current_time
+
 from local_random import R
 from army_organization import Division, Subject
-from .unit_registry import add_id
+from replay import Loger as loger, set_id
+
+
+def current_time_ms():
+    return current_time() * 1000
+
 
 class Unit(Subject):
     """Unit class"""
     __health: float
-    recharge: int  # not used
+    recharge_time: int  # in milliseconds
+    attack_availability_time: int
 
-    @add_id
+    @set_id
     def __init__(self, health: float, recharge: int):
         self.__health = health
-        self.recharge = recharge
+        self.recharge_time = recharge
+        self.attack_availability_time = current_time_ms()
 
     @property
     def health(self) -> float:
         return self.__health
 
     @health.setter
+    @loger.unit_low_health
     def health(self, value: float):
-        self.__health = value
+        self.__health = max(0, value)
         if(self.__health <= 0):
             self.up_division.exclude(self)
 
@@ -27,13 +37,29 @@ class Unit(Subject):
         return self.__health
 
     @property
-    def atack_probability(self) -> float:
+    def attack_probability(self) -> float:
         return 0
+
+    @loger.unit_attacks
+    def beat(self, other_unit) -> float:
+        if(False and self.attack_availability_time > current_time_ms()):
+            return 0.0
+
+        self.attack_availability_time = current_time_ms() + self.recharge_time
+
+        if(self.hit):
+            return self.damage
+        else:
+            return 0.0
 
     @property
     def hit(self) -> bool:
         """return whether attack was successful"""
-        return R.random() < self.atack_probability
+        return R.random() < self.attack_probability
+
+    @property
+    def damage(self) -> float:
+        return 0.0
 
     def __gt__(self, obj):
         return self.power > obj.power

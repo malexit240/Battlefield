@@ -6,29 +6,26 @@ STRATEGIES = {}
 
 
 def add_to_registry(strategy_name):
-    def decor(fn):
+    def register(fn):
         STRATEGIES[strategy_name] = fn
         return fn
-    return decor
+    return register
 
 
-def get_unit_with_strategy(name: str, army):
+def get_squad_with_strategy(name: str, army):
     return STRATEGIES[name](army)
 
 
 @add_to_registry('random')
-def random_choose_unit(army):
-    squad = R.choice(army.squads)
-    unit = R.choice(squad.units)
-
-    return unit
+def random_choose_squad(army):
+    return R.choice(army.squads)
 
 
 @add_to_registry('weakest')
-def weakest_choose_unit(army):
-    return min(min(army.squads).units)
+def weakest_choose_squad(army):
+    return min(army.squads)
 
 
 @add_to_registry('strongest')
-def strongest_choose_unit(army):
-    return max(max(army.squads).units)
+def strongest_choose_squad(army):
+    return max(army.squads)

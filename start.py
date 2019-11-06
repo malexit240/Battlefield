@@ -6,8 +6,6 @@ from army import Army
 from squad import Squad
 from units import Soldier, Vehicles
 
-u = Soldier(0,0)
-
 
 def get_operators(amount: int) -> list:
     operators = list()
@@ -58,6 +56,6 @@ def main():
 
     b.start_battle()
 
-    
-if(__name__ == '__main__'):\
+
+if(__name__ == '__main__'):
     main()

@@ -1,19 +1,19 @@
 from army_organization import Division, Subject
-
+from replay import set_id
 
 
 class Squad(Division, Subject):
     """Squad class"""
     units: list
 
+    @set_id
     def __init__(self, units):
         self.units = units
-        self.subdivision = self.units
+        self.subjects = self.units
 
     @property
     def power(self) -> float:
-        return sum((unit.power for unit in self.units))
-        
+        return sum([unit.power for unit in self.units])
 
     def __gt__(self, obj):
         try:

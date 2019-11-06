@@ -3,6 +3,8 @@ from statistics import mean
 from .unit import Unit
 from army_organization import Division
 from local_random import R
+from replay import Loger as loger
+
 
 class Vehicles(Unit, Division):
     """Vehicle class"""
@@ -18,16 +20,17 @@ class Vehicles(Unit, Division):
                     for operator in self._operators)) + self.__health
 
     @health.setter
+    @loger.unit_low_health
     def health(self, value):
         self.__health = value
 
     @property
     def damage(self) -> float:
-        return 0.1 + self.experience / 100.0
+        return 0.1 + self.experience
 
     @property
-    def atack_probability(self) -> float:
-        return 0.5 * (1 + self.__health / 100.0) * mean((operator.atack_probability
+    def attack_probability(self) -> float:
+        return 0.5 * (1 + self.__health / 100.0) * mean((operator.attack_probability
                                                          for operator in self._operators))
 
     @property
@@ -41,14 +44,16 @@ class Vehicles(Unit, Division):
     @operators.setter
     def operators(self, value):
         self._operators = value
-        self.subdivision = value
+        self.subjects = value
 
     @property
     def experience(self) -> int:
-        return sum((operator.experience 
+        return sum((operator.experience
                     for operator in self._operators))
 
     def damage_inflicte(self, damage: int):
+        if(damage == 0):
+            return
 
         self.__health -= 0.6*damage
 
@@ -66,10 +71,9 @@ class Vehicles(Unit, Division):
         if(len(self.operators) == 0):
             self.up_division.exclude(self)
 
-    @property
-    def hit(self) -> bool:
-        isHit = R.random() < self.atack_probability
-        if(isHit):
+    def beat(self, other_unit: Unit):
+        damage = super().beat(other_unit)
+        if(damage != 0):
             for o in self._operators:
                 o.experience += 1
-        return isHit
+        return damage

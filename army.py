@@ -1,4 +1,5 @@
 from army_organization import Division, Subject
+from replay import set_id
 
 
 class Army(Division, Subject):
@@ -10,10 +11,11 @@ class Army(Division, Subject):
     squads: list
     strategy: str
 
+    @set_id
     def __init__(self, name: str, squads: list, strategy: str):
         self.name = name
         self.squads = squads
-        self.subdivision = self.squads
+        self.subjects = self.squads
         self.strategy = strategy
 
     def on_excluding(self):

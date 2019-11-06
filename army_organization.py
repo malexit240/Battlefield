@@ -4,29 +4,32 @@ Represents the hierarchical principle in the army
 
 from abc import abstractclassmethod
 
+from replay import Loger as loger
+
 
 class Division:
     """Division class"""
 
-    _subdivision: list
+    _subjects: list
 
-    def __init__(self, subdivision: list):
-        self._subdivision = subdivision
+    def __init__(self, subjects: list):
+        self._subjects = subjects
 
     @property
-    def subdivision(self) -> list:
-        return self._subdivision
+    def subjects(self) -> list:
+        return self._subjects
 
-    @subdivision.setter
-    def subdivision(self, value):
-        self._subdivision = value
-        for sub in self.subdivision:
+    @subjects.setter
+    def subjects(self, value):
+        self._subjects = value
+        for sub in self.subjects:
             if(isinstance(sub, Subject)):
                 sub.set_up_division(self)
 
-    def exclude(self, obj):
-        if(obj in self.subdivision):
-            self.subdivision.remove(obj)
+    @loger.division_destroy
+    def exclude(self, subj):
+        if(subj in self.subjects):
+            self.subjects.remove(subj)
         self.on_excluding()
 
     @abstractclassmethod

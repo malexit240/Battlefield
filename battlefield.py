@@ -1,7 +1,8 @@
 from army_organization import Division
 from army import Army
-from strategy import get_unit_with_strategy as guws
+from strategy import get_squad_with_strategy as gsws
 from local_random import R
+from replay import Loger as loger
 
 
 class Battlefield(Division):
@@ -29,7 +30,7 @@ class Battlefield(Division):
     @armies.setter
     def armies(self, value):
         self._armies = value
-        self.subdivision = self._armies
+        self.subjects = self._armies
 
     def get_two_armies(self) -> tuple:
         """returns two random armies"""
@@ -47,18 +48,29 @@ class Battlefield(Division):
 
         return (self.armies[first], self.armies[second])
 
+    def squad_attacks(self, first, second):
+        for unit in first.units:
+            if(len(second.units) != 0):
+                if(unit.hit):
+                    enemy = R.choice(second.units)
+                    enemy.damage_inflicte(unit.beat(enemy))
+            else:
+                return
+
     def start_battle(self):
         """Run battle simulation"""
         self.shake_armies()
 
         while(len(self.armies) > 1):
             (first_army, second_army) = self.get_two_armies()
-            first_unit = guws(second_army.strategy, first_army)
-            second_unit = guws(first_army.strategy, second_army)
 
-            if(first_unit.hit):
-                second_unit.damage_inflicte(first_unit.damage)
-            if(second_unit.health > 0 and second_unit.hit):
-                first_unit.damage_inflicte(second_unit.damage)
+            first_squad = gsws(second_army.strategy, first_army)
+            second_squad = gsws(first_army.strategy, second_army)
+
+            if(first_squad.power < second_squad.power):
+                first_squad, second_squad = second_squad, first_squad
+
+            self.squad_attacks(first_squad, second_squad)
+            self.squad_attacks(second_squad, first_squad)
 
         print(f" \x1b[31m  Выиграла {self.armies[0].name} армия \x1b[37m")
