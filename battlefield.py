@@ -2,7 +2,7 @@ from army_organization import Division
 from army import Army
 from strategy import get_squad_with_strategy as gsws
 from local_random import R
-from replay import Loger as loger
+from battle_replay import replay as replay
 
 
 class Battlefield(Division):
@@ -57,6 +57,7 @@ class Battlefield(Division):
             else:
                 return
 
+    @replay.battle_end
     def start_battle(self):
         """Run battle simulation"""
         self.shake_armies()

@@ -2,24 +2,31 @@
     "seed": 0,
     "unit_configuration": {
         "max_soldier_health": 30,
-        "min_soldier_recharge": "1",
-        "max_soldier_recharge": "5",
-        "max_soldier_experience": "50"
+        "min_soldier_recharge": 1,
+        "max_soldier_recharge": 5,
+        "max_soldier_experience": 50
     },
     "armies": {
         "Red": {
             "strategy": "random",
-            "squad_amount": "1",
-            "units_per_squad": "2",
-            "vehicle_proportion": "0",
-            "operators_in_vehicle_amount": "3"
+            "squad_amount": 1,
+            "units_per_squad": 4,
+            "vehicle_proportion": 0.25,
+            "operators_in_vehicle_amount": 3
+        },
+        "Blue": {
+            "strategy": "weakest",
+            "squad_amount": 1,
+            "units_per_squad": 3,
+            "vehicle_proportion": 0.25,
+            "operators_in_vehicle_amount": 3
         },
         "Green": {
-            "strategy": "random",
-            "squad_amount": "1",
-            "units_per_squad": "2",
-            "vehicle_proportion": "0",
-            "operators_in_vehicle_amount": "3"
+            "strategy": "strongest",
+            "squad_amount": 1,
+            "units_per_squad": 3,
+            "vehicle_proportion": 0.25,
+            "operators_in_vehicle_amount": 3
         }
     }
 }

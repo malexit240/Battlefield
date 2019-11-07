@@ -4,7 +4,7 @@ Represents the hierarchical principle in the army
 
 from abc import abstractclassmethod
 
-from replay import Loger as loger
+from battle_replay import replay
 
 
 class Division:
@@ -26,7 +26,7 @@ class Division:
             if(isinstance(sub, Subject)):
                 sub.set_up_division(self)
 
-    @loger.division_destroy
+    @replay.division_destroy
     def exclude(self, subj):
         if(subj in self.subjects):
             self.subjects.remove(subj)

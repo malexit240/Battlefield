@@ -3,7 +3,8 @@ from statistics import mean
 from .unit import Unit
 from army_organization import Division
 from local_random import R
-from replay import Loger as loger
+from replay import set_id
+from battle_replay import replay
 
 
 class Vehicles(Unit, Division):
@@ -20,7 +21,7 @@ class Vehicles(Unit, Division):
                     for operator in self._operators)) + self.__health
 
     @health.setter
-    @loger.unit_low_health
+    @replay.unit_low_health
     def health(self, value):
         self.__health = value
 

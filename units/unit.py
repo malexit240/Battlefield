@@ -2,7 +2,8 @@ from time import time as current_time
 
 from local_random import R
 from army_organization import Division, Subject
-from replay import Loger as loger, set_id
+from replay import set_id
+from battle_replay import replay
 
 
 def current_time_ms():
@@ -26,7 +27,7 @@ class Unit(Subject):
         return self.__health
 
     @health.setter
-    @loger.unit_low_health
+    @replay.unit_low_health
     def health(self, value: float):
         self.__health = max(0, value)
         if(self.__health <= 0):
@@ -40,7 +41,7 @@ class Unit(Subject):
     def attack_probability(self) -> float:
         return 0
 
-    @loger.unit_attacks
+    @replay.unit_attacks
     def beat(self, other_unit) -> float:
         if(False and self.attack_availability_time > current_time_ms()):
             return 0.0
