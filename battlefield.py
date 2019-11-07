@@ -1,27 +1,28 @@
+"""
+Contains battlefield class
+"""
+
+from local_random import R
+
 from army_organization import Division
 from army import Army
+
 from strategy import get_squad_with_strategy as gsws
-from local_random import R
+
 from battle_replay import replay as replay
 
 
 class Battlefield(Division):
     """
-    Contains main while
+    Battlefield class
+
+    Contains battle simulation algorithm
     """
 
     _armies: list
 
     def __init__(self, armies: list):
         self._armies = armies
-
-    def shake_armies(self):
-        """Change armies order"""
-
-        armies = list()
-        while(len(self.armies) != 0):
-            armies.append(self.armies.pop(R.randint(0, len(self.armies)-1)))
-        self.armies = armies
 
     @property
     def armies(self):
@@ -48,11 +49,11 @@ class Battlefield(Division):
 
         return (self.armies[first], self.armies[second])
 
-    def squad_attacks(self, first, second):
-        for unit in first.units:
-            if(len(second.units) != 0):
+    def squad_attacks(self, attacker, defender):
+        for unit in attacker.units:
+            if(len(defender.units) != 0):
                 if(unit.hit):
-                    enemy = R.choice(second.units)
+                    enemy = R.choice(defender.units)
                     enemy.damage_inflicte(unit.beat(enemy))
             else:
                 return
@@ -60,7 +61,6 @@ class Battlefield(Division):
     @replay.battle_end
     def start_battle(self):
         """Run battle simulation"""
-        self.shake_armies()
 
         while(len(self.armies) > 1):
             (first_army, second_army) = self.get_two_armies()

@@ -1,17 +1,21 @@
+"""
+Contains army class
+"""
+
 from army_organization import Division, Subject
-from replay import set_id
 
 
 class Army(Division, Subject):
     """
     Army class
+
+    contains squads
     """
 
     name: str
     squads: list
     strategy: str
 
-    @set_id
     def __init__(self, name: str, squads: list, strategy: str):
         self.name = name
         self.squads = squads

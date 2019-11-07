@@ -1,3 +1,7 @@
+"""
+module contains functions that return divisions with units or subdivisions
+"""
+
 from configuration import CONFIGURATION as Conf
 from local_random import R
 from army import Army
@@ -6,6 +10,7 @@ from units import Soldier, Vehicles
 
 
 def get_operators(amount: int) -> list:
+    """returns operators instances"""
     operators = list()
 
     for _ in range(amount):
@@ -16,6 +21,7 @@ def get_operators(amount: int) -> list:
 
 
 def get_units(amount: int, vehicle_proportion: float, operators_amount: int) -> list:
+    """returns units(soldiers and vehicles) instances"""
     units = list()
 
     for _ in range(amount):
@@ -29,6 +35,7 @@ def get_units(amount: int, vehicle_proportion: float, operators_amount: int) -> 
 
 
 def get_squads(army_config: list) -> list:
+    """returns squads with units"""
     squads = list()
     for _ in range(int(army_config['squad_amount'])):
         squads.append(
