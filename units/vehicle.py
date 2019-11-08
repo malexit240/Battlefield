@@ -35,8 +35,8 @@ class Vehicles(Unit, Division):
 
     @property
     def attack_probability(self) -> float:
-        return 0.5 * (1 + self.__health / 100.0) * gavg((operator.attack_probability
-                                                         for operator in self._operators))
+        return 0.5 * (1 + self.__health / 100.0) * gavg([operator.attack_probability
+                                                         for operator in self._operators])
 
     @property
     def power(self) -> float:
