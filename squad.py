@@ -1,9 +1,12 @@
+"""this module contains Squad class"""
+
 from army_organization import Division, Subject
 from replay import set_id
 
 
 class Squad(Division, Subject):
-    """Squad class"""
+    """Squad class
+    contains units"""
     units: list
 
     @set_id
@@ -30,5 +33,6 @@ class Squad(Division, Subject):
             raise AttributeError()
 
     def on_excluding(self):
+        """overrides Division class base method"""
         if(len(self.units) == 0):
             self.up_division.exclude(self)

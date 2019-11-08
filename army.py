@@ -23,5 +23,6 @@ class Army(Division, Subject):
         self.strategy = strategy
 
     def on_excluding(self):
+        """overrides Division class base method"""
         if(len(self.squads) == 0):
             self.up_division.exclude(self)

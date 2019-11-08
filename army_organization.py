@@ -2,8 +2,6 @@
 Represents the hierarchical principle in the army
 """
 
-from abc import abstractclassmethod
-
 from battle_replay import replay
 
 
@@ -32,7 +30,6 @@ class Division:
             self.subjects.remove(subj)
         self.on_excluding()
 
-    @abstractclassmethod
     def on_excluding(self):
         pass
 

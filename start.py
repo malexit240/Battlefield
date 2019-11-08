@@ -1,10 +1,14 @@
+"""
+this module is the start point of the programm
+"""
+
 from configuration import CONFIGURATION as Conf
 from local_random import R
 
 from units_creator import get_squads, Army
 from battlefield import Battlefield
 
-from replay import Loger, LogerJSON, load_replay_from_JSON
+from replay import Logger, LoggerJSON, load_replay_from_JSON
 from battle_replay import replay
 
 
@@ -24,11 +28,11 @@ def main():
 
     b.start_battle()
 
-    console_loger = Loger(replay)
+    console_loger = Logger(replay)
     console_loger.write_all()
 
     with open('result.json', 'w') as output_file:
-        loger = LogerJSON(replay, output_file)
+        loger = LoggerJSON(replay, output_file)
         loger.write_all()
 
 

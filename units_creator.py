@@ -1,5 +1,5 @@
 """
-module contains functions that return divisions with units or subdivisions
+this module contains functions that return divisions with units or subdivisions
 """
 
 from configuration import CONFIGURATION as Conf

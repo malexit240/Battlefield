@@ -1,14 +1,18 @@
-from statistics import mean
+"""this module contains a Vehicle class"""
 
 from .unit import Unit
 from army_organization import Division
+
+from geometric_average import geometric_average as gavg
 from local_random import R
+
 from replay import set_id
 from battle_replay import replay
 
 
 class Vehicles(Unit, Division):
-    """Vehicle class"""
+    """Vehicle class
+    contains operators"""
 
     def __init__(self, health: int, recharge: int,):
         Unit.__init__(self, health, recharge)
@@ -31,7 +35,7 @@ class Vehicles(Unit, Division):
 
     @property
     def attack_probability(self) -> float:
-        return 0.5 * (1 + self.__health / 100.0) * mean((operator.attack_probability
+        return 0.5 * (1 + self.__health / 100.0) * gavg((operator.attack_probability
                                                          for operator in self._operators))
 
     @property
@@ -53,6 +57,8 @@ class Vehicles(Unit, Division):
                     for operator in self._operators))
 
     def damage_inflicte(self, damage: int):
+        """reduces a vehicle self health on damage value and partially reduces operators health"""
+
         if(damage == 0):
             return
 
@@ -69,10 +75,14 @@ class Vehicles(Unit, Division):
             self.up_division.exclude(self)
 
     def on_excluding(self):
+        """trigger when unit excludes from division
+        override the base method of the Division class"""
         if(len(self.operators) == 0):
             self.up_division.exclude(self)
 
     def beat(self, other_unit: Unit):
+        """extends the base method of the Unit class to add experience increase on a successful attack"""
+
         damage = super().beat(other_unit)
         if(damage != 0):
             for o in self._operators:

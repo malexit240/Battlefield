@@ -1,17 +1,28 @@
+"""this module contains logger classes for printing replays to 
+console(Logger object without set file attribute)
+text file(Logger object with set file attribute)
+json file(LoggerJSON)
+"""
+
 from .replay import Replay
 from json import dumps
 
 
-class Loger:
-    replays: Replay
+class Logger:
+    """Logger class that allows print all events
+     from repaly object to console or file"""
+
+    replay: Replay
     out: None
 
     def __init__(self, replays: Replay, file=None):
-        self.replays = replays
+        self.replay = replays
         self.out = file
 
     def write_all(self):
-        for event in self.replays.events:
+        """write all events from replay to console or file (if file attribute was set)"""
+
+        for event in self.replay.events:
             if(event.name == 'attacks'):
                 print(
                     'юнит {} наносит юниту {} {} единиц урона'.format(*event.values), file=self.out)
@@ -29,11 +40,17 @@ class Loger:
                     'армия {} победила'.format(*event.values), file=self.out)
 
 
-class LogerJSON(Loger):
+class LoggerJSON(Logger):
+    """override Logger class to allow write replays to file in json fromat"""
+
     def __init__(self, replays: Replay, file):
         self.replays = replays
         self.out = file
 
     def write_all(self):
+        """write all events to file in json format
+        override method from Logger class
+        """
+
         self.out.write(dumps([(event.name, event.values)
                               for event in self.replays.events], indent=2))

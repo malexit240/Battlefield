@@ -1,9 +1,10 @@
+"""this module contains configuration class and it instance"""
+
 import json
 
 
 class Configuration:
-    """
-    Configuration class
+    """Configuration class
 
     contains information for units+ instantiation
     and seed for randomizer
@@ -13,13 +14,8 @@ class Configuration:
     armies: dict
     units: dict
 
-    def __init__(self):
-        pass
-
     def load(self, file_path: str):
-        """
-        fills attributes from configuration file
-        """
+        """fills attributes from configuration file"""
 
         json_file = open(file_path, 'rb')
         raw = json.load(json_file)

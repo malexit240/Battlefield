@@ -1,3 +1,7 @@
+"""this module contains Event class and Replay class.
+It need to saving battle simulation events
+"""
+
 from json import load
 
 
@@ -42,6 +46,9 @@ class Replay:
         self.events = list()
 
     def unit_attacks(self, fn):
+        """this method expecting unit instance with _id attribute 
+         and decorator can be attach to Unit.beat method or similar"""
+
         def wrapper(*args, **kwargs):
             units = [unit
                      for unit in args

@@ -1,5 +1,5 @@
 """
-Contains battlefield class
+this module contains battlefield class
 """
 
 from local_random import R
@@ -50,6 +50,8 @@ class Battlefield(Division):
         return (self.armies[first], self.armies[second])
 
     def squad_attacks(self, attacker, defender):
+        """inflict damage to defender units from attacker units"""
+
         for unit in attacker.units:
             if(len(defender.units) != 0):
                 if(unit.hit):

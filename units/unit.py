@@ -1,17 +1,23 @@
+"""this module contains a Unit class
+and function that returns current system time in ms"""
+
 from time import time as current_time
 
 from local_random import R
 from army_organization import Division, Subject
+
 from replay import set_id
 from battle_replay import replay
 
 
 def current_time_ms():
+    """returns current system time in milliseconds"""
     return current_time() * 1000
 
 
 class Unit(Subject):
-    """Unit class"""
+    """Base unit class"""
+
     __health: float
     recharge_time: int  # in milliseconds
     attack_availability_time: int
@@ -43,7 +49,10 @@ class Unit(Subject):
 
     @replay.unit_attacks
     def beat(self, other_unit) -> float:
-        if(False and self.attack_availability_time > current_time_ms()):
+        """if attack was successful returns damage value 
+        else return zero"""
+
+        if(self.attack_availability_time > current_time_ms()):
             return 0.0
 
         self.attack_availability_time = current_time_ms() + self.recharge_time

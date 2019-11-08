@@ -1,9 +1,13 @@
+"""this module contains Soldier class"""
+
 from .unit import Unit
 from local_random import R
 
 
 class Soldier(Unit):
-    """Soldier class"""
+    """Soldier class
+    extends and overrides Unit class"""
+
     _experience: int
 
     def __init__(self, health: int, recharge: int):
@@ -31,12 +35,11 @@ class Soldier(Unit):
         return 0.8 * self.experience + 0.2 * self.health
 
     def damage_inflicte(self, damage: int):
-        if(damage == 0):
-            return
-
+        """reduces a soldier health on damage value"""
         self.health -= damage
 
     def beat(self, other_unit: Unit):
+        """extends the base method of the Unit class to add experience increase on a successful attack"""
         damage = super().beat(other_unit)
         if(damage != 0):
             self.experience += 1

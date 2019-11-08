@@ -1,9 +1,10 @@
-__id = 0
+"""this module contains decorator for adding Id attribute to any object"""
+
+__id = 0  # id counter
 
 
 def set_id(fn):
-    """
-    add '_id' attribute to class
+    """add '_id' attribute to class
 
     try attach decorator to __init__ method
     """
