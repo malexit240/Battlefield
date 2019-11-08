@@ -22,7 +22,7 @@ class Battlefield(Division):
     _armies: list
 
     def __init__(self, armies: list):
-        self._armies = armies
+        self.armies = armies
 
     @property
     def armies(self):
@@ -75,5 +75,3 @@ class Battlefield(Division):
 
             self.squad_attacks(first_squad, second_squad)
             self.squad_attacks(second_squad, first_squad)
-
-        print(f" \x1b[31m  Выиграла {self.armies[0].name} армия \x1b[37m")
