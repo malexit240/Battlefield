@@ -80,10 +80,10 @@ class Vehicles(Unit, Division):
         if(len(self.operators) == 0):
             self.up_division.exclude(self)
 
-    def beat(self, other_unit: Unit):
+    def beat(self):
         """extends the base method of the Unit class to add experience increase on a successful attack"""
 
-        damage = super().beat(other_unit)
+        damage = super().beat()
         if(damage != 0):
             for o in self._operators:
                 o.experience += 1
